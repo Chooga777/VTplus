@@ -1,0 +1,50 @@
+{% extends 'vts/base.html' %}
+{% load static %}
+{% block title %} Рейтинг вчителів {% endblock %}
+{% load vts_tags %}
+{% block body %}
+
+<div class="item content">
+	<font size="5" face="Roboto">
+		<article>
+			<div class="post-title">
+				<div class="entry-icon"><img class="entry-icon" src="{% static 'vts/img/teachers.png' %}"></div>
+				<h1 class="entry-title">Рейтинг викладачів кафедри ОТ: що робити, щоб закрити?</h1>
+				<div class="post-meta">Стаття, 10 грудня в 17:35</div>
+			</div>
+			<div class="post-main">
+                <ul class="post-catmenu">
+                    {% if cat_selected == 0 %}
+                        <li class="selected teach">Усі категорії</li>
+                    {% else %}
+                        <li class="teach"><a href="{% url 'teachers' %}">Усі категорії</a></li>
+                    {% endif %}
+                    {% show_categories 'name' cat_selected %}
+                    <!--{% for c in cats %}
+	                    {% if c.pk == cat_selected %}
+		                    <li class="selected">{{c.name}}</li>
+	                    {% else %}
+		                    <li><a href="{{ c.get_absolute_url }}">{{c.name}}</a></li>
+	                    {% endif %}
+                    {% endfor %}-->
+                </ul>
+                <ul class="post-main_list-articles">
+                    {% for p in teachers %}
+                    <li class="teach">
+                        <h2>{{p.title}}</h2>
+                        {% if p.photo %}
+	                        <br><p><img class="img-article" src="{{ p.photo.url }}" alt="вчитель"></p>
+                        {% endif %}
+                        {% autoescape off %}
+                        <p>{{p.content|linebreaks|truncatewords:35}}</p>
+                        {% endautoescape %}
+                        <a class="post-main_link-read-post" href="{{ p.get_absolute_url }}"><div>Читати</div></a>
+                        <br>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+		</article>
+	</font>
+</div>
+{% endblock %}

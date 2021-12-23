@@ -1,0 +1,278 @@
+{% load static %}
+{% load vts_tags %}
+<!DOCTYPE html>
+<html lang="ua">
+	<head>
+		<title>{{ title }}</title>
+		<link rel="icon" href="{% static 'vts/img/favicon.ico' %}">
+		<link rel="stylesheet" href="{% static 'vts/css/style.css' %}">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+		<meta http-equiv="Content-type" content="text/html;charset=UTF-8"/>
+	</head>
+	<body>
+		<div class="page">
+			<header class="item header">
+				<div class="headgrid">
+					<div class="headgrid__logo">
+						<a class="headgrid__logo-text" href="{% url 'home' %}"> <img src="{% static 'vts/img/logoVT+.png' %}" alt="Логотип VT+" width="30" height="30"> VTplus</a>
+					</div>
+					<nav class="headgrid__dws-menu">
+						<ul>
+							<li><a href="{% url 'home' %}"><h2>Головна</h2></a></li>
+							<li><a href="https://kpi.ua/ru/news" target="_blank"><h2>Новини</h2></a></li>
+							<li><a href="#"><h2>Кафедра ОТ</h2></a>
+								<ul>
+									<li><a href="{% url 'teachers' %}">Викладачі</a></li>
+									<li><a href="{% url 'studentsrating' %}">Рейтинг студентів</a></li>
+									<li><a href="http://mobilnist.kpi.ua/" target="_blank">Мобільність в КПІ</a></li>
+									<li><a href="{% url 'vpp' %}">Відрахування<br>Переведення<br>Поновлення</a></li>
+									<li><a href="#">Розклад</a>
+										<ul>
+											<li><a href="http://rozklad.kpi.ua/Schedules/ViewSchedule.aspx?g=587f21eb-397f-4eb1-9f4e-9d7a2b73c845" target="_blank">ІО-91</a></li>
+											<li><a href="http://rozklad.kpi.ua/Schedules/ViewSchedule.aspx?g=1c08077c-e3dd-4f1b-906d-bc72375e4b5b" target="_blank">ІО-92</a></li>
+											<li><a href="http://rozklad.kpi.ua/Schedules/ViewSchedule.aspx?g=9eb6ef7f-3f3b-4fe9-acb2-1c06bfe2b021" target="_blank">ІО-93</a></li>
+											<li><a href="http://rozklad.kpi.ua/Schedules/ViewSchedule.aspx?g=6eab17ce-3094-404a-bed4-6058ac920f20" target="_blank">ІВ-91</a></li>
+											<li><a href="http://rozklad.kpi.ua/Schedules/ViewSchedule.aspx?g=6a62825d-93fc-47fa-8f19-e3540d1cecbd" target="_blank">ІВ-92</a></li>
+											<li><a href="http://rozklad.kpi.ua/Schedules/ViewSchedule.aspx?g=3a7cb6e7-f6a0-40df-98bd-0a424714c4fa" target="_blank">ІВ-93</a></li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+							<li><a href="#"><h2>Навчання</h2></a>
+								<ul>
+									<li><a href="{% url 'general_information' %}">Загальна інформація</a></li>
+									<li><a href="https://choice-helper.com/wheelOfFortune/index?lang=ru" target="_blank">Крутилка ШАР</a></li>
+									<li><a href="{% url 'about_student_ticket' %}">Про студентський квиток</a></li>
+									<li><a href="{% url 'about_marks' %}">Про оцінки</a></li>
+									<li><a href="{% url 'about_diplom' %}">Про диплом</a></li>
+									<li><a href="{% url 'about_session' %}">Про сесію та атестацію</a></li>
+									<li><a href="#">Телеграм чати ОТ</a>
+										<ul>
+											<li><a href="https://t.me/fict_123" target="_blank">123 чат</a></li>
+											<li><a href="https://t.me/vt_cats" target="_blank">ОТ 123 cats</a></li>
+										</ul>
+									</li>
+									<li><a href="{% url 'kpi_telegram_channels' %}">Телеграм канали КПІ</a></li>
+								</ul>
+							</li>
+							<li><a href="#"><h2>Вступ</h2></a>
+								<ul>
+									<li><a href="{% url 'aboutvstupcom' %}">Приймальна комісія</a></li>
+									<li><a href="{% url 'aboutdormitory' %}">Про гуртожиток</a></li>
+									<li><a href="{% url 'abouthospital' %}">Про лікарню</a></li>
+								</ul>
+							</li>
+							<li><a href="https://ecampus.kpi.ua" target="_blank"><h2>Ecampus</h2></a></li>
+							<li><a href="https://do.ipo.kpi.ua/course/" target="_blank"><h2>Moodle</h2></a></li>
+						</ul>
+					</nav>
+					{% if request.user.is_authenticated %}
+					<div class="headgrid__profile">
+						<a class="headgrid__profile-text" href="{% url 'profile' %}"><img src="{% static 'vts/img/user3.png' %}" alt="Регістрація" width="30" height="30"> {{ user.username }}</a><a class="headgrid__profile-text">|</a><a class="headgrid__profile-text" href="{% url 'logout' %}"><img src="{% static 'vts/img/user4.png' %}" alt="" width="30" height="30"> Вийти</a>
+					</div>
+					{% else %}
+					<div class="headgrid__profilen">
+						<a class="headgrid__profile-text" href="{% url 'register' %}"><img src="{% static 'vts/img/user0.png' %}" alt="Регістрація" width="30" height="30">Реєстрація</a><a class="headgrid__profile-text">|</a><a class="headgrid__profile-text" href="{% url 'login' %}"><img src="{% static 'vts/img/user1.png' %}" alt="Войти" width="30" height="30">Увійти</a>
+					</div>
+					{% endif %}
+				</div>
+			</header>
+			<div class="item sidebar">
+				<div class="sidebar-0">
+					<a class="sidebar-0__telegram" href="https://t.me/+HWE_8bYVXb83ZTk6"><div class="sidebar-0__telegram-text"><img src="{% static 'vts/img/telegram2.png' %}" alt="telegram">  Знайти нас в Telegram</img></div></a>
+				</div>
+				<div class="sidebar-1">
+					<div class="sidebar-1__widget-list">
+						<div class="sidebar-1__widget-list-header">Корисно прочитати:</div>
+						<a class="sidebar-1__widget-list-link" href="{% url 'general_information' %}">
+							<div class="sidebar-1__widget-list-item">
+								<div class="sidebar-1__widget-list-item-left">
+									<img class="sidebar-1__widget-list-item-image" src="{% static 'vts/img/wl1.png' %}" alt="">
+								</div>
+								<div class="sidebar-1__widget-list-item-right">
+									Загальна інформація
+								</div>
+							</div>
+						</a>
+						<a class="sidebar-1__widget-list-link" href="{% url 'teachers' %}">
+							<div class="sidebar-1__widget-list-item">
+								<div class="sidebar-1__widget-list-item-left">
+									<img class="sidebar-1__widget-list-item-image" src="{% static 'vts/img/wl2.png' %}" alt="">
+								</div>
+								<div class="sidebar-1__widget-list-item-right">
+									Викладачі
+								</div>
+							</div>
+						</a>
+						<a class="sidebar-1__widget-list-link" href="{% url 'kpi_telegram_channels' %}">
+							<div class="sidebar-1__widget-list-item">
+								<div class="sidebar-1__widget-list-item-left">
+									<img class="sidebar-1__widget-list-item-image" src="{% static 'vts/img/wl3.png' %}" alt="">
+								</div>
+								<div class="sidebar-1__widget-list-item-right">
+									Телеграм канали КПІ
+								</div>
+							</div>
+						</a>
+						<a class="sidebar-1__widget-list-link" href="{% url 'about_student_ticket' %}">
+							<div class="sidebar-1__widget-list-item">
+								<div class="sidebar-1__widget-list-item-left">
+									<img class="sidebar-1__widget-list-item-image" src="{% static 'vts/img/wl4.png' %}" alt="">
+								</div>
+								<div class="sidebar-1__widget-list-item-right">
+									Про студентський квиток
+								</div>
+							</div>
+						</a>
+						<a class="sidebar-1__widget-list-link" style=""  href="{% url 'studentsrating' %}">
+							<div class="sidebar-1__widget-list-item">
+								<div class="sidebar-1__widget-list-item-left">
+									<img class="sidebar-1__widget-list-item-image" src="{% static 'vts/img/wl5.png' %}" alt="">
+								</div>
+								<div class="sidebar-1__widget-list-item-right">
+									Про рейтинг студентів
+								</div>
+							</div>
+						</a>
+						<a class="sidebar-1__widget-list-link" href="{% url 'about_session' %}">
+							<div class="sidebar-1__widget-list-item">
+								<div class="sidebar-1__widget-list-item-left">
+									<img class="sidebar-1__widget-list-item-image" src="{% static 'vts/img/wl6.png' %}" alt="">
+								</div>
+								<div class="sidebar-1__widget-list-item-right">
+									Про сесію
+								</div>
+							</div>
+						</a>
+						<a class="sidebar-1__widget-list-link" href="{% url 'aboutdormitory' %}">
+							<div class="sidebar-1__widget-list-item">
+								<div class="sidebar-1__widget-list-item-left">
+									<img class="sidebar-1__widget-list-item-image" src="{% static 'vts/img/wl7.png' %}" alt="">
+								</div>
+								<div class="sidebar-1__widget-list-item-right">
+									Про гуртожиток
+								</div>
+							</div>
+						</a>
+					</div>
+				</div>
+				<div class="sidebar-2">
+					<div class="sidebar-2__newsblock">
+						<div class="mySlides fade">
+							<div class="numbertext">1 / 8</div>
+							<a href="https://t.me/dnvr_31" target="_blank"><img class="sidebar-2__newsblock-image" src="{% static 'vts/img/DNVR.png' %}" alt="DNVR"></a>
+						</div>
+
+						<div class="mySlides fade">
+							<div class="numbertext">2 / 8</div>
+							<a href="https://t.me/dekanat_fiot" target="_blank"><img class="sidebar-2__newsblock-image" src="{% static 'vts/img/dekanatFIOT.png' %}" alt="dekanatFIOT"></a>
+						</div>
+						<div class="mySlides fade">
+							<div class="numbertext">3 / 8</div>
+							<a href="https://t.me/sr_kpi" target="_blank"><img class="sidebar-2__newsblock-image" src="{% static 'vts/img/SRKPI.png' %}" alt="SRKPI"></a>
+						</div>
+						<div class="mySlides fade">
+							<div class="numbertext">4 / 8</div>
+							<a href="https://t.me/kpilive" target="_blank"><img class="sidebar-2__newsblock-image" src="{% static 'vts/img/kpilive.png' %}" alt="kpilive"></a>
+						</div>
+						<div class="mySlides fade">
+							<div class="numbertext">5 / 8</div>
+							<a href="https://t.me/pskpi" target="_blank"><img class="sidebar-2__newsblock-image" src="{% static 'vts/img/pskpi.png' %}" alt="pskpi"></a>
+						</div>
+						<div class="mySlides fade">
+							<div class="numbertext">6 / 8</div>
+							<a href="https://t.me/kpischolarship" target="_blank"><img class="sidebar-2__newsblock-image" src="{% static 'vts/img/kpischolarship.png' %}" alt="kpischolarship"></a>
+						</div>
+						<div class="mySlides fade">
+							<div class="numbertext">7 / 8</div>
+							<a href="https://t.me/kpi_fict" target="_blank"><img class="sidebar-2__newsblock-image" src="{% static 'vts/img/kpifict.png' %}" alt="kpifict"></a>
+						</div>
+						<div class="mySlides fade">
+							<div class="numbertext">8 / 8</div>
+							<a href="https://t.me/analyticsFICT" target="_blank"><img class="sidebar-2__newsblock-image" src="{% static 'vts/img/analyticsFICT.png' %}" alt="analyticsFICT"></a>
+						</div>
+						<!-- Next and previous buttons -->
+						<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+						<a class="next" onclick="plusSlides(1)">&#10095;</a>
+					</div>
+					<br>
+				</div>
+				<div class="sidebar-3">
+					<div class="sidebar-3__calendar-block">
+						<div class="month">
+							<div class="date">
+								<h1></h1>
+								<p></p>
+							</div>
+						</div>
+						<div class="weekdays">
+							<div>Sun</div>
+							<div>Mon</div>
+							<div>Tue</div>
+							<div>Wed</div>
+							<div>Thu</div>
+							<div>Fri</div>
+							<div>Sat</div>
+						</div>
+						<div class="days"></div>
+					</div>
+				</div>
+			</div>
+            {% block body %} {% endblock %}
+			<footer class="item footer">
+				<div class="foot">
+					<div class="brand">
+						<h2>VTplus</h2>
+						<p>VTplus - це доступний ресурс для кожного студента кафедри ОТ. Наша задача - зробити навчання в КПІ легше та простіше. Кожен студент може знайти корисну для себе інформацію. </p>
+						<div>
+							<br/>
+							<p>© 2021 - VT+ by: Hladkov D.V., Pedenko D.D.</p>
+						</div>
+					</div>
+					<div>
+						<h2>Про проект</h2>
+						<ul>
+							<li><a href="https://github.com/" target="_blank">GitHub</a></li>
+							<li><a href="{% url 'home' %}">Мета</a></li>
+							<li><a href="#">Інструкція користувача</a></li>
+						</ul>
+					</div>
+					<div>
+						<h2>Про КПІ</h2>
+						<ul>
+							<li><a href="https://kpi.ua/" target="_blank">КПІ</a></li>
+							<li><a href="https://kpi.ua/ru/fiot" target="_blank">ФІОТ</a></li>
+							<li><a href="https://comsys.kpi.ua" target="_blank">Кафедра ОТ</a></li>
+							<li><a href="https://comsys.kpi.ua/kontakti-2">Контакти</a></li>
+						</ul>
+					</div>
+					<div>
+						<h2>Навчання</h2>
+						<ul>
+							<li><a href="https://www.sikorsky-distance.org/" target="_blank">SikorskyDistance</a></li>
+							<li><a href="https://ecampus.kpi.ua" target="_blank">Ecampus</a></li>
+							<li><a href="https://do.ipo.kpi.ua/course" target="_blank">Moodle</a></li>
+							<li><a href="https://www.coursera.org/" target="_blank">Coursera</a></li>
+							<li><a href="https://prometheus.org.ua/" target="_blank">Prometheus</a></li>
+						</ul>
+					</div>
+					<div class="icons">
+						<h2>Соціальні мережі</h2>
+						<div class="accounts">
+							<a href="https://www.instagram.com/kpi.ua/" target="_blank"><img src="{% static 'vts/img/instagram.png' %}" alt="instagram"></a>
+							<a href="https://www.youtube.com/channel/UCLlal-hnJsAMW71Q0ZFVKfQ" target="_blank"><img src="{% static 'vts/img/youtube.png' %}" alt="youtube"></a>
+							<a href="https://inlnk.ru/KeBLk" target="_blank"><img src="{% static 'vts/img/facebook.png' %}" alt="facebook"></a>
+							<a href="https://t.me/+HWE_8bYVXb83ZTk6" target="_blank"><img src="{% static 'vts/img/telegram.png' %}" alt="telegram"></a>
+							<a href="https://github.com/" target="_blank"><img src="{% static 'vts/img/github.png' %}" alt="github"></a>
+						</div>
+					</div>
+				</div>
+			</footer>
+		</div>
+		<script src="{% static 'vts/js/script1.js' %}"></script>
+		<script src="{% static 'vts/js/script2.js' %}"></script>
+	</body>
+</html>

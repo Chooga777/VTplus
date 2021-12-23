@@ -1,0 +1,30 @@
+{% extends 'vts/base.html' %}
+{% load static %}
+{% load vts_tags %}
+{% block title %} Реєстрація {% endblock %}
+{% block body %}
+
+<div class="item content">
+	<font size="5" face="Roboto">
+		<article>
+			<div class="post-title_register">
+				<div class="entry-icon"><img class="entry-icon" src="{% static 'vts/img/register.png' %}"></div>
+				<br>
+				<h1 class="entry-title" align="center">Реєстрація на платформі VTplus</h1>
+				<br><br>
+				<form method="post">
+                    {% csrf_token %}
+					{% for f in form %}
+					<p><label class="" for="{{ f.id_for_label }}">{{f.label}}: </label>{{ f }}</p>
+					<br>
+					<div class="form-error">{{ f.errors }}</div>
+					{% endfor %}
+                    <!--{{ form.as_p }}-->
+					<br>
+                    <div class="buttonl"><button type="submit" class="button-gradient">РЕЄСТРАЦІЯ</button></div>
+                </form>
+			</div>
+		</article>
+	</font>
+</div>
+{% endblock %}

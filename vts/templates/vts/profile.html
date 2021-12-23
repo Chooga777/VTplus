@@ -1,0 +1,29 @@
+{% extends 'vts/base.html' %}
+{% load static %}
+{% load vts_tags %}
+{% block title %} Профіль {% endblock %}
+{% block body %}
+
+<div class="item content">
+	<font size="5" face="Roboto">
+		<article>
+			<div class="post-title_register">
+				<div class="entry-icon"><img class="entry-icon" src="{% static 'vts/img/login.png' %}"></div>
+				<br>
+				<h1 class="entry-title" align="center">Профіль користувача {{user.username}}</h1><br>
+				<div class="user-info">
+					<div class="user-data">
+						<div class="label">Нікнейм:</div>
+						<div class="data">{{user.username}}</div>
+						<br>
+					</div>
+					<div class="user-data">
+						<div class="label">Пошта:</div>
+						<div class="data">{{user.email}}</div>
+					</div>
+				</div>
+			</div>
+		</article>
+	</font>
+</div>
+{% endblock %}
